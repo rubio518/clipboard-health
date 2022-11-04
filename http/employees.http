@@ -1,0 +1,13 @@
+POST http://localhost:3000/employees/
+Content-Type: application/json
+
+{ 
+  "salary": 3000,
+  "currency": "USD",
+  "department": "Engineering",
+  "subDepartment": "Platform"
+}
+###
+GET http://localhost:3000/employees/
+###
+DELETE http://localhost:3000/employees/1
