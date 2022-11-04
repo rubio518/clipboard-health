@@ -5,6 +5,7 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { EmployeesModule } from './employees/employees.module';
 import { Employee } from './employees/employee.model';
 import { StatisticsModule } from './statistics/statistics.module';
+import { AuthModule } from './auth/auth.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { StatisticsModule } from './statistics/statistics.module';
     }),
     EmployeesModule,
     StatisticsModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

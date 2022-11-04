@@ -8,21 +8,17 @@ Content-Type: application/json
 }
 ###
 @token = {{login.response.body.access_token}}
-###
-POST http://localhost:3000/employees/
-Content-Type: application/json
+GET http://localhost:3000/statistics
 Authorization: Bearer {{token}}
 
-{ 
-  "salary": 3000,
-  "currency": "USD",
-  "department": "Product",
-  "subDepartment": "Sales",
-  "onContract": true
-}
 ###
-GET http://localhost:3000/employees/
+GET http://localhost:3000/statistics/on-contract
 Authorization: Bearer {{token}}
+
 ###
-DELETE http://localhost:3000/employees/1
+GET http://localhost:3000/statistics/department
+Authorization: Bearer {{token}}
+
+###
+GET http://localhost:3000/statistics/sub-department
 Authorization: Bearer {{token}}

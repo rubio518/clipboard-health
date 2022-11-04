@@ -17,4 +17,7 @@ export class Employee extends Model {
 
   @Column
   subDepartment: string;
+
+  @Column
+  onContract: boolean;
 }

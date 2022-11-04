@@ -1,32 +1,62 @@
 import { Injectable } from '@nestjs/common';
-import { CreateStatisticDto } from './dto/create-statistic.dto';
-import { UpdateStatisticDto } from './dto/update-statistic.dto';
+import { InjectModel } from '@nestjs/sequelize';
+import { Employee } from 'src/employees/employee.model';
+
+import { fn, col } from 'sequelize';
 
 @Injectable()
 export class StatisticsService {
-  create(createStatisticDto: CreateStatisticDto) {
-    return 'This action adds a new statistic';
-  }
+  constructor(
+    @InjectModel(Employee)
+    private employeeModel: typeof Employee,
+  ) {}
 
-  findAll() {
-    return `This action returns all statistics`;
+  async getStatisticsForAll() {
+    const ss = await this.employeeModel.findOne({
+      attributes: [
+        [fn('AVG', col('salary')), 'averageSalary'],
+        [fn('MIN', col('salary')), 'minSalary'],
+        [fn('MAX', col('salary')), 'maxSalary'],
+      ],
+    });
+    return ss;
   }
-
-  findOne(id: number) {
-    return `This action returns a #${id} statistic`;
+  async getStatisticsOnContract() {
+    const ss = await this.employeeModel.findOne({
+      attributes: [
+        [fn('AVG', col('salary')), 'averageSalary'],
+        [fn('MIN', col('salary')), 'minSalary'],
+        [fn('MAX', col('salary')), 'maxSalary'],
+      ],
+      where: {
+        onContract: true,
+      },
+    });
+    return ss;
   }
-
-  update(id: number, updateStatisticDto: UpdateStatisticDto) {
-    return `This action updates a #${id} statistic`;
+  async getStatisticsByDepartment() {
+    const ss = await this.employeeModel.findAll({
+      attributes: [
+        [fn('AVG', col('salary')), 'averageSalary'],
+        [fn('MIN', col('salary')), 'minSalary'],
+        [fn('MAX', col('salary')), 'maxSalary'],
+        'department',
+      ],
+      group: 'department',
+    });
+    return ss;
   }
-
-  remove(id: number) {
-    return `This action removes a #${id} statistic`;
+  async getStatisticsBySubDepartment() {
+    const ss = await this.employeeModel.findAll({
+      attributes: [
+        [fn('AVG', col('salary')), 'averageSalary'],
+        [fn('MIN', col('salary')), 'minSalary'],
+        [fn('MAX', col('salary')), 'maxSalary'],
+        'department',
+        'sub_department',
+      ],
+      group: ['department', 'sub_department'],
+    });
+    return ss;
   }
-
-  // TODO:
-  getStatisticsForAll() {}
-  getStatisticsOnContract() {}
-  getStatisticsByDepartment() {}
-  getStatisticsBySubDepartment() {}
 }

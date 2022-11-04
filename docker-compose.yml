@@ -1,0 +1,14 @@
+version: "3.8"
+
+services:
+  api:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    env_file:
+    - .env
+    # Run a command against the development stage of the image
+    command: npm run start
+    ports:
+      - 3000:3000
+

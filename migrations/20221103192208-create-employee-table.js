@@ -13,6 +13,10 @@ module.exports = {
       currency: Sequelize.STRING,
       department: Sequelize.STRING,
       sub_department: Sequelize.STRING,
+      on_contract: {
+        type: Sequelize.BOOLEAN,
+        defaultValue: false,
+      },
       created_at: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP'),
