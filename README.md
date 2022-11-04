@@ -1,50 +1,40 @@
 ## Clipboard Health Test
 ## Description
+Code challenge about a microservice that returns statistics about an entity which I called employees
 
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
-
-## Installation
-
-```bash
-$ npm install
+the project is divided into 2 routes 
+```
+/employees/
+/statistics/
 ```
 
-## Running the app
+### Stack
+- NestJS as the backend framework
+- Typescript as the language
+- runtime: node 18
+- db: Sqlite3
+- orm: sequelize
+- authentication: passportjs
+- authorization: jwt
+- docker
+- NestJS class-validator to validate input
+
+### Running the app
 
 ```bash
 # development
-$ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
+docker-compose up
 ```
 
-## Test
+### Testing Endpoints
+I used a vscode extension called `REST Client` id: humao.rest-client
 
-```bash
-# unit tests
-$ npm run test
+There are two files containing employees endpoints and statistics endpoints
 
-# e2e tests
-$ npm run test:e2e
-
-# test coverage
-$ npm run test:cov
+located in 
+```
+/http/employees.http
+/http/statistics.http
 ```
 
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+To make a request first you need to login which I created a dummy user/pass: "test/secret" then the token will be used automatically
